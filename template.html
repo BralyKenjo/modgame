@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f1a">
-  <!-- ⬇️ SỬA TITLE Ở ĐÂY cho mỗi video -->
+  <meta name="theme-color" content="#070b14">
   <title>Script Roblox - Video mới | Roblox Mod Hub</title>
 
   <style>
-    /* ========== RESET & BASE ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-0: #0b0f1a;
-      --bg-1: #121826;
-      --bg-2: #1a2235;
-      --border: rgba(148, 163, 184, 0.12);
-      --border-hover: rgba(239, 68, 68, 0.5);
-      --text-1: #f1f5f9;
+      --bg-0: #070b14;
+      --bg-1: #0f172a;
+      --bg-2: #1e293b;
+      --border: rgba(56, 189, 248, 0.12);
+      --border-hover: rgba(56, 189, 248, 0.45);
+      --text-1: #e2e8f0;
       --text-2: #94a3b8;
       --text-3: #64748b;
-      --accent: #ef4444;
-      --accent-2: #dc2626;
-      --accent-glow: rgba(239, 68, 68, 0.4);
+      --accent: #0ea5e9;
+      --accent-2: #0284c7;
+      --accent-soft: #7dd3fc;
+      --accent-glow: rgba(14, 165, 233, 0.28);
       --radius: 14px;
     }
 
@@ -44,13 +43,12 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 600px 400px at 50% 0%, rgba(239, 68, 68, 0.18), transparent 60%),
-        radial-gradient(ellipse 500px 400px at 50% 100%, rgba(220, 38, 38, 0.1), transparent 60%);
+        radial-gradient(ellipse 700px 450px at 50% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
+        radial-gradient(ellipse 600px 450px at 50% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ========== LAYOUT ========== */
     .wrap {
       position: relative;
       z-index: 1;
@@ -62,7 +60,6 @@
       flex-direction: column;
     }
 
-    /* ========== HEADER ========== */
     header {
       text-align: center;
       margin-bottom: 36px;
@@ -73,13 +70,18 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 56px;
-      height: 56px;
+      width: 60px;
+      height: 60px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       border-radius: 16px;
       margin-bottom: 18px;
-      box-shadow: 0 8px 24px var(--accent-glow);
-      font-size: 28px;
+      box-shadow: 0 8px 24px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .logo svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
     }
 
     h1 {
@@ -93,7 +95,6 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ========== LINKS ========== */
     .links {
       display: flex;
       flex-direction: column;
@@ -101,7 +102,6 @@
       flex: 1;
     }
 
-    /* ========== BUTTON BASE ========== */
     .btn {
       position: relative;
       display: flex;
@@ -121,20 +121,19 @@
     .btn:hover {
       border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(239, 68, 68, 0.2);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
     }
 
     .btn:active { transform: translateY(0); }
 
-    /* Số thứ tự */
     .btn-num {
       flex-shrink: 0;
       width: 26px;
       height: 26px;
       border-radius: 8px;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #fca5a5;
+      background: rgba(14, 165, 233, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-soft);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -142,13 +141,12 @@
       font-weight: 700;
     }
 
-    /* Icon */
     .btn-icon {
       flex-shrink: 0;
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      background: rgba(239, 68, 68, 0.1);
+      background: rgba(14, 165, 233, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -195,41 +193,38 @@
       transform: translateX(4px);
     }
 
-    /* ========== ĐẶC BIỆT: LINK4M ========== */
+    /* ====== NÚT LINK4M ĐẶC BIỆT ====== */
     .btn-special {
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #075985 100%);
+      border: 1px solid rgba(125, 211, 252, 0.35);
       padding: 20px 20px;
-      box-shadow: 0 10px 36px rgba(239, 68, 68, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 32px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
     .btn-special:hover {
-      box-shadow: 0 16px 44px rgba(239, 68, 68, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 16px 40px rgba(14, 165, 233, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      border-color: rgba(125, 211, 252, 0.6);
     }
 
-    /* Shine chạy qua */
     .btn-special::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
       transform: translateX(-100%);
-      animation: shine 3s ease-in-out infinite;
+      animation: shine 3.5s ease-in-out infinite;
       pointer-events: none;
     }
 
     .btn-special .btn-num {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.18);
       border-color: rgba(255, 255, 255, 0.35);
       color: #fff;
     }
 
     .btn-special .btn-icon {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .btn-special .btn-title,
@@ -241,12 +236,11 @@
     .btn-special .btn-desc { opacity: 0.85; }
     .btn-special:hover .btn-arrow { color: #fff; }
 
-    /* Badge "KHUYÊN DÙNG" */
     .badge {
       position: absolute;
       top: 8px;
       right: 8px;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.22);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       padding: 3px 8px;
@@ -255,11 +249,11 @@
       font-weight: 800;
       letter-spacing: 0.6px;
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       z-index: 2;
     }
 
-    /* ========== NHÓM BUMX (2 cột) ========== */
+    /* ====== NHÓM BUMX ====== */
     .bumx-group {
       display: flex;
       gap: 10px;
@@ -283,7 +277,6 @@
     .bumx-group .btn-num   { width: 22px; height: 22px; font-size: 11px; }
     .bumx-group .btn-arrow { display: none; }
 
-    /* ========== FOOTER ========== */
     footer {
       text-align: center;
       margin-top: 40px;
@@ -298,13 +291,15 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     footer a {
-      color: #fca5a5;
+      color: var(--accent-soft);
       text-decoration: none;
       font-weight: 600;
-      border-bottom: 1px dotted rgba(239, 68, 68, 0.4);
+      border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
       transition: color 0.2s, border-color 0.2s;
     }
 
@@ -313,7 +308,6 @@
       border-bottom-color: var(--accent);
     }
 
-    /* ========== EMPTY STATE ========== */
     .empty {
       text-align: center;
       padding: 48px 24px;
@@ -330,7 +324,6 @@
       opacity: 0.6;
     }
 
-    /* ========== ANIMATIONS ========== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -342,7 +335,6 @@
       100% { transform: translateX(100%); }
     }
 
-    /* ========== MOBILE ========== */
     @media (max-width: 480px) {
       .wrap { padding: 40px 16px 30px; }
       .btn { padding: 14px; gap: 12px; }
@@ -354,6 +346,8 @@
       .bumx-group .btn-icon { width: 30px; height: 30px; font-size: 15px; }
       .bumx-group .btn-title { font-size: 12px; }
       .bumx-group .btn-desc { display: none; }
+      .logo { width: 54px; height: 54px; }
+      .logo svg { width: 26px; height: 26px; }
     }
 
     @media (max-width: 360px) {
@@ -365,13 +359,15 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="logo">🟥</div>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.674 1.268 1.269 22.719l17.057.011 4.405-21.463L5.674 1.268zM16.32 15.771l-6.339 1.302-1.302-6.34 6.34-1.301 1.301 6.339z"/>
+        </svg>
+      </div>
       <h1>Vượt 1 trong 4 link này để lấy script nhé</h1>
     </header>
 
-    <div class="links" id="links">
-      <!-- Nút sẽ được render bằng JS bên dưới -->
-    </div>
+    <div class="links" id="links"></div>
 
     <footer>
       <span class="copyright-text">
@@ -387,18 +383,10 @@
        ⬇️⬇️⬇️  CHỈ SỬA PHẦN NÀY MỖI KHI LÀM VIDEO MỚI  ⬇️⬇️⬇️
        ========================================================= */
     const LINKS = {
-      // 1. Link4M — nút đặc biệt (khuyên dùng)
-      link4m: "https://link4m.co/abcxyz",
-
-      // 2. Bumx — có thể có 1 hoặc cả 2 (Review / Lấy mã)
-      //    Để trống "" nếu không dùng
-      bumxReview: "https://bumx.co/review-abcxyz",
-      bumxCode:   "https://bumx.co/code-abcxyz",
-
-      // 3. Bbmkts
-      bbmkts: "",
-
-      // 4. LinkForEarn
+      link4m:      "https://link4m.co/abcxyz",
+      bumxReview:  "https://bumx.co/review-abcxyz",
+      bumxCode:    "https://bumx.co/code-abcxyz",
+      bbmkts:      "",
       linkforearn: ""
     };
     /* =========================================================
@@ -408,7 +396,7 @@
     const container = document.getElementById('links');
     const buttons = [];
 
-    // ---- Slot 1: Link4M (đặc biệt) ----
+    // 1. Link4M
     if (LINKS.link4m.trim()) {
       buttons.push(`
         <a class="btn btn-special" href="${LINKS.link4m.trim()}" target="_blank" rel="noopener noreferrer">
@@ -424,41 +412,40 @@
       `);
     }
 
-    // ---- Slot 2: Bumx (1 hoặc 2 nút) ----
+    // 2. Bumx (1 hoặc 2 nút)
     const bumxReview = LINKS.bumxReview.trim();
     const bumxCode   = LINKS.bumxCode.trim();
     if (bumxReview || bumxCode) {
-      const hasBoth = bumxReview && bumxCode;
-      let bumxHtml = '<div class="bumx-group">';
+      let h = '<div class="bumx-group">';
       if (bumxReview) {
-        bumxHtml += `
+        h += `
           <a class="btn" href="${bumxReview}" target="_blank" rel="noopener noreferrer">
-            <span class="btn-num">${hasBoth ? '2' : '2'}</span>
+            <span class="btn-num">2</span>
             <span class="btn-icon">🎬</span>
             <span class="btn-content">
               <span class="btn-title">Bumx Review</span>
-              <span class="btn-desc">Xem review trước</span>
+              <span class="btn-desc">Xem review</span>
             </span>
           </a>
         `;
       }
       if (bumxCode) {
-        bumxHtml += `
+        h += `
           <a class="btn" href="${bumxCode}" target="_blank" rel="noopener noreferrer">
             <span class="btn-num">2</span>
             <span class="btn-icon">🔑</span>
             <span class="btn-content">
               <span class="btn-title">Bumx Lấy mã</span>
-              <span class="btn-desc">Lấy mã tải script</span>
+              <span class="btn-desc">Lấy mã tải</span>
             </span>
           </a>
         `;
       }
-      bumxHtml += '</div>';
-      buttons.push(bumxHtml);
+      h += '</div>';
+      buttons.push(h);
     }
 
-    // ---- Slot 3: Bbmkts ----
+    // 3. Bbmkts
     if (LINKS.bbmkts.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.bbmkts.trim()}" target="_blank" rel="noopener noreferrer">
@@ -473,7 +460,7 @@
       `);
     }
 
-    // ---- Slot 4: LinkForEarn ----
+    // 4. LinkForEarn
     if (LINKS.linkforearn.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.linkforearn.trim()}" target="_blank" rel="noopener noreferrer">
@@ -488,7 +475,6 @@
       `);
     }
 
-    // ---- Render ----
     if (buttons.length === 0) {
       container.innerHTML = `
         <div class="empty">
@@ -498,7 +484,6 @@
       `;
     } else {
       container.innerHTML = buttons.join('');
-      // Stagger animation
       container.querySelectorAll('.btn').forEach((el, i) => {
         el.style.animationDelay = `${i * 60}ms`;
       });
