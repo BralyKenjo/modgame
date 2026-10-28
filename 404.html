@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f1a">
+  <meta name="theme-color" content="#070b14">
   <meta name="robots" content="noindex">
   <title>404 — Không tìm thấy trang | Roblox Mod Hub</title>
 
   <style>
-    /* ========== RESET & BASE ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-0: #0b0f1a;
-      --bg-1: #121826;
-      --bg-2: #1a2235;
-      --border: rgba(148, 163, 184, 0.12);
-      --border-hover: rgba(239, 68, 68, 0.5);
-      --text-1: #f1f5f9;
+      --bg-0: #070b14;
+      --bg-1: #0f172a;
+      --bg-2: #1e293b;
+      --border: rgba(56, 189, 248, 0.12);
+      --border-hover: rgba(56, 189, 248, 0.45);
+      --text-1: #e2e8f0;
       --text-2: #94a3b8;
       --text-3: #64748b;
-      --accent: #ef4444;
-      --accent-2: #dc2626;
-      --accent-glow: rgba(239, 68, 68, 0.35);
+      --accent: #0ea5e9;
+      --accent-2: #0284c7;
+      --accent-soft: #7dd3fc;
+      --accent-glow: rgba(14, 165, 233, 0.28);
       --radius: 14px;
     }
 
@@ -39,19 +39,17 @@
       overflow-x: hidden;
     }
 
-    /* Background glow đỏ */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 600px 400px at 50% 0%, rgba(239, 68, 68, 0.18), transparent 60%),
-        radial-gradient(ellipse 500px 400px at 50% 100%, rgba(220, 38, 38, 0.1), transparent 60%);
+        radial-gradient(ellipse 700px 450px at 50% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
+        radial-gradient(ellipse 600px 450px at 50% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ========== LAYOUT ========== */
     .wrap {
       position: relative;
       z-index: 1;
@@ -65,7 +63,6 @@
       justify-content: center;
     }
 
-    /* ========== CARD ========== */
     .card {
       width: 100%;
       background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
@@ -77,29 +74,33 @@
       animation: fadeUp 0.5s ease-out both;
     }
 
-    /* ========== ICON ========== */
+    /* ====== LOGO SVG ROBLOX ====== */
     .icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 96px;
       height: 96px;
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
-      border: 1px solid rgba(248, 113, 113, 0.3);
-      border-radius: 28px;
-      font-size: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 26px;
       margin-bottom: 24px;
-      box-shadow: 0 8px 30px var(--accent-glow);
+      box-shadow: 0 8px 30px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
       animation: float 3s ease-in-out infinite;
     }
 
-    /* ========== TEXT ========== */
+    .icon svg {
+      width: 46px;
+      height: 46px;
+      fill: #fff;
+    }
+
+    /* ====== SỐ 404 ====== */
     .code {
       font-size: 72px;
       font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 1;
-      background: linear-gradient(135deg, #ef4444, #dc2626);
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -120,7 +121,7 @@
       margin-bottom: 32px;
     }
 
-    /* ========== REASONS LIST ========== */
+    /* ====== 3 LÝ DO ====== */
     .reasons {
       display: flex;
       flex-direction: column;
@@ -142,7 +143,7 @@
 
     .reason:hover {
       border-color: var(--border-hover);
-      background: rgba(239, 68, 68, 0.05);
+      background: rgba(14, 165, 233, 0.06);
       transform: translateX(4px);
     }
 
@@ -169,10 +170,7 @@
       padding-top: 3px;
     }
 
-    .reason-text b {
-      color: var(--text-1);
-      font-weight: 600;
-    }
+    .reason-text b { color: var(--text-1); font-weight: 600; }
 
     .reason-sub {
       display: block;
@@ -182,7 +180,7 @@
       font-weight: 400;
     }
 
-    /* ========== BUTTONS ========== */
+    /* ====== NÚT ====== */
     .actions {
       display: flex;
       flex-direction: column;
@@ -208,17 +206,15 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       color: white;
-      box-shadow: 0 8px 24px var(--accent-glow);
+      box-shadow: 0 8px 24px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px var(--accent-glow);
+      box-shadow: 0 12px 32px rgba(14, 165, 233, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
 
-    .btn-primary:active {
-      transform: translateY(0);
-    }
+    .btn-primary:active { transform: translateY(0); }
 
     .btn-ghost {
       background: transparent;
@@ -229,28 +225,50 @@
     .btn-ghost:hover {
       border-color: var(--border-hover);
       color: var(--text-1);
-      background: rgba(239, 68, 68, 0.05);
+      background: rgba(14, 165, 233, 0.06);
     }
 
-    /* ========== FOOTER ========== */
+    /* ====== FOOTER NOTE ====== */
     .footer-note {
       margin-top: 32px;
       font-size: 12px;
       color: var(--text-3);
       text-align: center;
+      line-height: 1.6;
     }
 
     .footer-note a {
-      color: var(--text-2);
+      color: var(--accent-soft);
       text-decoration: none;
-      border-bottom: 1px dotted var(--border);
+      border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+      transition: color 0.2s, border-color 0.2s;
     }
 
     .footer-note a:hover {
       color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
-    /* ========== ANIMATIONS ========== */
+    /* Path lỗi (nếu có) */
+    #error-path {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-3);
+      word-break: break-all;
+      display: none;
+    }
+
+    #error-path.show { display: block; }
+
+    #error-path code {
+      background: rgba(15, 23, 42, 0.8);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-soft);
+      font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    }
+
+    /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -261,20 +279,25 @@
       50%      { transform: translateY(-8px) rotate(-3deg); }
     }
 
-    /* ========== MOBILE ========== */
+    /* ====== MOBILE ====== */
     @media (max-width: 480px) {
       .wrap { padding: 40px 16px; }
       .card { padding: 36px 20px; }
       .code { font-size: 56px; }
       h1 { font-size: 19px; }
-      .icon { width: 80px; height: 80px; font-size: 40px; }
+      .icon { width: 80px; height: 80px; border-radius: 22px; }
+      .icon svg { width: 38px; height: 38px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <div class="icon">🚫</div>
+      <div class="icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.674 1.268 1.269 22.719l17.057.011 4.405-21.463L5.674 1.268zM16.32 15.771l-6.339 1.302-1.302-6.34 6.34-1.301 1.301 6.339z"/>
+        </svg>
+      </div>
       <div class="code">404</div>
       <h1>Không tìm thấy trang</h1>
       <p class="lead">Rất tiếc, trang bạn đang tìm không tồn tại hoặc đã bị gỡ.</p>
@@ -317,7 +340,24 @@
       <p class="footer-note">
         Nếu bạn cho rằng đây là lỗi, hãy quay lại từ <a href="./index.html">trang chủ</a> và chọn đúng video.
       </p>
+
+      <p id="error-path">
+        Đường dẫn không tồn tại: <code id="error-path-value"></code>
+      </p>
     </div>
   </div>
+
+  <script>
+    // Hiển thị path bị lỗi (nếu có)
+    try {
+      const path = decodeURIComponent(location.pathname);
+      if (path && path !== '/' && !path.endsWith('/index.html')) {
+        const el = document.getElementById('error-path');
+        const val = document.getElementById('error-path-value');
+        val.textContent = path;
+        el.classList.add('show');
+      }
+    } catch {}
+  </script>
 </body>
 </html>
