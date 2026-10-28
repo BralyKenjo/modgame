@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070b14">
+  <meta name="theme-color" content="#0b0f1a">
   <title>Script Roblox - Video mới | Roblox Mod Hub</title>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-0: #070b14;
-      --bg-1: #0f172a;
-      --bg-2: #1e293b;
-      --border: rgba(56, 189, 248, 0.12);
-      --border-hover: rgba(56, 189, 248, 0.45);
-      --text-1: #e2e8f0;
+      --bg-0: #0b0f1a;
+      --bg-1: #121826;
+      --bg-2: #1a2235;
+      --border: rgba(148, 163, 184, 0.12);
+      --border-hover: rgba(239, 68, 68, 0.5);
+      --text-1: #f1f5f9;
       --text-2: #94a3b8;
       --text-3: #64748b;
-      --accent: #0ea5e9;
-      --accent-2: #0284c7;
-      --accent-soft: #7dd3fc;
-      --accent-glow: rgba(14, 165, 233, 0.28);
+      --accent: #ef4444;
+      --accent-2: #dc2626;
+      --accent-glow: rgba(239, 68, 68, 0.4);
       --radius: 14px;
     }
 
@@ -43,8 +42,8 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 700px 450px at 50% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
-        radial-gradient(ellipse 600px 450px at 50% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
+        radial-gradient(ellipse 600px 400px at 50% 0%, rgba(239, 68, 68, 0.18), transparent 60%),
+        radial-gradient(ellipse 500px 400px at 50% 100%, rgba(220, 38, 38, 0.1), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -70,18 +69,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 60px;
-      height: 60px;
+      width: 56px;
+      height: 56px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       border-radius: 16px;
       margin-bottom: 18px;
-      box-shadow: 0 8px 24px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    }
-
-    .logo svg {
-      width: 30px;
-      height: 30px;
-      fill: #fff;
+      box-shadow: 0 8px 24px var(--accent-glow);
+      font-size: 28px;
     }
 
     h1 {
@@ -121,7 +115,7 @@
     .btn:hover {
       border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(239, 68, 68, 0.2);
     }
 
     .btn:active { transform: translateY(0); }
@@ -131,9 +125,9 @@
       width: 26px;
       height: 26px;
       border-radius: 8px;
-      background: rgba(14, 165, 233, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent-soft);
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -146,7 +140,7 @@
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      background: rgba(14, 165, 233, 0.1);
+      background: rgba(239, 68, 68, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -194,36 +188,38 @@
     }
 
     .btn-special {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #075985 100%);
-      border: 1px solid rgba(125, 211, 252, 0.35);
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       padding: 20px 20px;
-      box-shadow: 0 10px 32px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 36px rgba(239, 68, 68, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-special:hover {
-      box-shadow: 0 16px 40px rgba(14, 165, 233, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      border-color: rgba(125, 211, 252, 0.6);
+      box-shadow: 0 16px 44px rgba(239, 68, 68, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.35);
     }
 
     .btn-special::after {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
       transform: translateX(-100%);
-      animation: shine 3.5s ease-in-out infinite;
+      animation: shine 3s ease-in-out infinite;
       pointer-events: none;
     }
 
     .btn-special .btn-num {
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.35);
       color: #fff;
     }
 
     .btn-special .btn-icon {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.18);
     }
 
     .btn-special .btn-title,
@@ -239,7 +235,7 @@
       position: absolute;
       top: 8px;
       right: 8px;
-      background: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       padding: 3px 8px;
@@ -248,7 +244,7 @@
       font-weight: 800;
       letter-spacing: 0.6px;
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       z-index: 2;
     }
 
@@ -289,15 +285,13 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
     }
 
     footer a {
-      color: var(--accent-soft);
+      color: #fca5a5;
       text-decoration: none;
       font-weight: 600;
-      border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+      border-bottom: 1px dotted rgba(239, 68, 68, 0.4);
       transition: color 0.2s, border-color 0.2s;
     }
 
@@ -344,8 +338,6 @@
       .bumx-group .btn-icon { width: 30px; height: 30px; font-size: 15px; }
       .bumx-group .btn-title { font-size: 12px; }
       .bumx-group .btn-desc { display: none; }
-      .logo { width: 54px; height: 54px; }
-      .logo svg { width: 26px; height: 26px; }
     }
 
     @media (max-width: 360px) {
@@ -357,15 +349,13 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="logo">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5.674 1.268 1.269 22.719l17.057.011 4.405-21.463L5.674 1.268zM16.32 15.771l-6.339 1.302-1.302-6.34 6.34-1.301 1.301 6.339z"/>
-        </svg>
-      </div>
+      <div class="logo">🟥</div>
       <h1>Vượt 1 trong 4 link này để lấy script nhé</h1>
     </header>
 
-    <div class="links" id="links"></div>
+    <div class="links" id="links">
+      <!-- Nút sẽ được render bằng JS bên dưới -->
+    </div>
 
     <footer>
       <span class="copyright-text">
@@ -406,33 +396,34 @@
     const bumxReview = LINKS.bumxReview.trim();
     const bumxCode   = LINKS.bumxCode.trim();
     if (bumxReview || bumxCode) {
-      let h = '<div class="bumx-group">';
+      const hasBoth = bumxReview && bumxCode;
+      let bumxHtml = '<div class="bumx-group">';
       if (bumxReview) {
-        h += `
+        bumxHtml += `
           <a class="btn" href="${bumxReview}" target="_blank" rel="noopener noreferrer">
-            <span class="btn-num">2</span>
+            <span class="btn-num">${hasBoth ? '2' : '2'}</span>
             <span class="btn-icon">🎬</span>
             <span class="btn-content">
               <span class="btn-title">Bumx Review</span>
-              <span class="btn-desc">Xem review</span>
+              <span class="btn-desc">Xem review trước</span>
             </span>
           </a>
         `;
       }
       if (bumxCode) {
-        h += `
+        bumxHtml += `
           <a class="btn" href="${bumxCode}" target="_blank" rel="noopener noreferrer">
             <span class="btn-num">2</span>
             <span class="btn-icon">🔑</span>
             <span class="btn-content">
               <span class="btn-title">Bumx Lấy mã</span>
-              <span class="btn-desc">Lấy mã tải</span>
+              <span class="btn-desc">Lấy mã tải script</span>
             </span>
           </a>
         `;
       }
-      h += '</div>';
-      buttons.push(h);
+      bumxHtml += '</div>';
+      buttons.push(bumxHtml);
     }
 
     if (LINKS.bbmkts.trim()) {
@@ -478,5 +469,150 @@
     }
   })();
   </script>
+
+  <!-- ================= MUSIC PLAYER ================= -->
+  <div class="music-player">
+    <button class="music-btn is-muted" id="music-toggle" aria-label="Bật nhạc" title="Bật nhạc nền">
+      <svg class="icon-unmuted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+      </svg>
+      <svg class="icon-muted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div id="yt-music-container" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"></div>
+
+  <style>
+    .music-player {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9999;
+    }
+
+    .music-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #7dd3fc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(14, 165, 233, 0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+      padding: 0;
+      position: relative;
+    }
+
+    .music-btn:hover {
+      border-color: #0ea5e9;
+      color: #0ea5e9;
+      transform: scale(1.08);
+      box-shadow: 0 6px 22px rgba(14, 165, 233, 0.45), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+
+    .music-btn:active { transform: scale(0.95); }
+
+    .music-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .music-btn .icon-unmuted { display: none; }
+    .music-btn .icon-muted   { display: block; }
+    .music-btn:not(.is-muted) .icon-unmuted { display: block; }
+    .music-btn:not(.is-muted) .icon-muted   { display: none; }
+
+    .music-btn:not(.is-muted)::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      animation: musicPulse 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes musicPulse {
+      0%   { transform: scale(1);    opacity: 1; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .music-player { top: 12px; right: 12px; }
+      .music-btn { width: 40px; height: 40px; }
+      .music-btn svg { width: 18px; height: 18px; }
+    }
+  </style>
+
+  <script>
+  (function() {
+    const VIDEO_ID = 'I1nee4q6nrk';
+
+    let player = null;
+    let isMuted = true;
+
+    const btn = document.getElementById('music-toggle');
+
+    function updateUI() {
+      btn.classList.toggle('is-muted', isMuted);
+      btn.setAttribute('aria-label', isMuted ? 'Bật nhạc' : 'Tắt nhạc');
+      btn.setAttribute('title', isMuted ? 'Bật nhạc nền' : 'Tắt nhạc nền');
+    }
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('yt-music-container', {
+        height: '1',
+        width: '1',
+        videoId: VIDEO_ID,
+        playerVars: {
+          autoplay: 1,
+          loop: 1,
+          playlist: VIDEO_ID,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0
+        },
+        events: {
+          onReady: function(e) {
+            e.target.setVolume(50);
+            e.target.mute();
+            e.target.playVideo();
+            updateUI();
+          },
+          onStateChange: function(e) {
+            if (e.data === 0) e.target.playVideo();
+          }
+        }
+      });
+    };
+
+    btn.addEventListener('click', function() {
+      if (!player || !player.mute) return;
+      isMuted = !isMuted;
+      if (isMuted) player.mute();
+      else player.unMute();
+      updateUI();
+    });
+
+    updateUI();
+  })();
+  </script>
+  <!-- =============== END MUSIC PLAYER =============== -->
 </body>
 </html>
