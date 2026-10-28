@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0f1a">
+  <meta name="theme-color" content="#070b14">
   <title>Roblox Mod Hub</title>
-  <meta name="description" content="Tổng hợp mod, script, hack Roblox mới nhất">
+  <meta name="description" content="Tổng hợp script, mod, hack Roblox mới nhất">
 
   <style>
-    /* ========== RESET & BASE ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-0: #0b0f1a;
-      --bg-1: #121826;
-      --bg-2: #1a2235;
-      --border: rgba(148, 163, 184, 0.12);
-      --border-hover: rgba(239, 68, 68, 0.5);
-      --text-1: #f1f5f9;
+      --bg-0: #070b14;
+      --bg-1: #0f172a;
+      --bg-2: #1e293b;
+      --border: rgba(56, 189, 248, 0.12);
+      --border-hover: rgba(56, 189, 248, 0.45);
+      --text-1: #e2e8f0;
       --text-2: #94a3b8;
       --text-3: #64748b;
-      --accent: #ef4444;
-      --accent-2: #dc2626;
-      --accent-glow: rgba(239, 68, 68, 0.35);
+      --accent: #0ea5e9;
+      --accent-2: #0284c7;
+      --accent-soft: #7dd3fc;
+      --accent-glow: rgba(14, 165, 233, 0.28);
       --radius: 14px;
     }
 
@@ -44,13 +44,12 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 600px 400px at 15% 0%, rgba(239, 68, 68, 0.15), transparent 60%),
-        radial-gradient(ellipse 500px 400px at 85% 100%, rgba(220, 38, 38, 0.12), transparent 60%);
+        radial-gradient(ellipse 700px 450px at 20% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
+        radial-gradient(ellipse 600px 450px at 80% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ========== LAYOUT ========== */
     .wrap {
       position: relative;
       z-index: 1;
@@ -59,7 +58,6 @@
       padding: 60px 20px 80px;
     }
 
-    /* ========== HEADER ========== */
     header {
       text-align: center;
       margin-bottom: 44px;
@@ -70,13 +68,18 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 64px;
-      height: 64px;
+      width: 68px;
+      height: 68px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       border-radius: 18px;
       margin-bottom: 20px;
-      box-shadow: 0 8px 30px var(--accent-glow);
-      font-size: 32px;
+      box-shadow: 0 8px 28px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .logo svg {
+      width: 34px;
+      height: 34px;
+      fill: #fff;
     }
 
     h1 {
@@ -95,7 +98,6 @@
       font-size: 14px;
     }
 
-    /* ========== STATUS BAR ========== */
     .status-bar {
       display: flex;
       align-items: center;
@@ -120,7 +122,6 @@
     .dot.loading { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
     .dot.error   { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.6); }
 
-    /* ========== LIST ========== */
     .list {
       display: flex;
       flex-direction: column;
@@ -147,7 +148,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), transparent 50%);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.07), transparent 50%);
       opacity: 0;
       transition: opacity 0.25s;
     }
@@ -155,7 +156,7 @@
     .item:hover {
       border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(239, 68, 68, 0.2);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
     }
 
     .item:hover::before { opacity: 1; }
@@ -167,13 +168,18 @@
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
-      border: 1px solid rgba(248, 113, 113, 0.2);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(2, 132, 199, 0.15));
+      border: 1px solid rgba(56, 189, 248, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
       transition: transform 0.25s;
+    }
+
+    .item-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--accent-soft);
     }
 
     .item:hover .item-icon { transform: scale(1.08) rotate(-4deg); }
@@ -215,7 +221,6 @@
       transform: translateX(4px);
     }
 
-    /* ========== SKELETON ========== */
     .skeleton {
       height: 80px;
       border-radius: var(--radius);
@@ -225,7 +230,6 @@
       border: 1px solid var(--border);
     }
 
-    /* ========== EMPTY / ERROR ========== */
     .state {
       text-align: center;
       padding: 48px 24px;
@@ -242,7 +246,6 @@
       opacity: 0.6;
     }
 
-    /* ========== REFRESH BTN ========== */
     .refresh {
       display: flex;
       align-items: center;
@@ -263,16 +266,12 @@
     .refresh:hover {
       border-color: var(--border-hover);
       color: var(--text-1);
-      background: rgba(239, 68, 68, 0.05);
+      background: rgba(14, 165, 233, 0.06);
     }
 
     .refresh:disabled { opacity: 0.4; cursor: not-allowed; }
+    .refresh.spinning .refresh-icon { animation: spin 0.8s linear infinite; }
 
-    .refresh.spinning .refresh-icon {
-      animation: spin 0.8s linear infinite;
-    }
-
-    /* ========== FOOTER ========== */
     footer {
       text-align: center;
       margin-top: 56px;
@@ -288,7 +287,6 @@
 
     footer a:hover { color: var(--accent); }
 
-    /* ========== ANIMATIONS ========== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -308,18 +306,23 @@
       to { transform: rotate(360deg); }
     }
 
-    /* ========== MOBILE ========== */
     @media (max-width: 480px) {
       .wrap { padding: 40px 16px 60px; }
       .item { padding: 16px; gap: 14px; }
-      .item-icon { width: 40px; height: 40px; font-size: 18px; }
+      .item-icon { width: 40px; height: 40px; }
+      .logo { width: 60px; height: 60px; }
+      .logo svg { width: 30px; height: 30px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="logo">🟥</div>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.674 1.268 1.269 22.719l17.057.011 4.405-21.463L5.674 1.268zM16.32 15.771l-6.339 1.302-1.302-6.34 6.34-1.301 1.301 6.339z"/>
+        </svg>
+      </div>
       <h1>Roblox Mod Hub</h1>
       <p class="subtitle">Tổng hợp script, mod, hack Roblox mới nhất</p>
     </header>
@@ -347,26 +350,15 @@
 
   <script>
   (async () => {
-    // ================= CẤU HÌNH =================
     const CONFIG = {
-      // Để trống → tự detect với username.github.io
-      // Dùng custom domain → điền tay owner/repo
       owner: '',
       repo: '',
-
-      // File không hiển thị thành nút
       exclude: ['index.html', 'template.html', '404.html'],
-
-      // Cache 10 phút
       cacheTTL: 10 * 60 * 1000,
-
-      // Fetch <title> từ mỗi file (nút đẹp hơn)
-      fetchTitles: true,
-
-      // Icon mặc định cho mọi video Roblox
-      defaultIcon: '🟥'
+      fetchTitles: true
     };
-    // =============================================
+
+    const ROBLOX_ICON = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.674 1.268 1.269 22.719l17.057.011 4.405-21.463L5.674 1.268zM16.32 15.771l-6.339 1.302-1.302-6.34 6.34-1.301 1.301 6.339z"/></svg>`;
 
     const $dot       = document.getElementById('dot');
     const $status    = document.getElementById('status');
@@ -379,46 +371,31 @@
       $status.textContent = text;
     };
 
-    // ---------- Detect owner/repo ----------
     function detectRepo() {
-      if (CONFIG.owner && CONFIG.repo) {
-        return { owner: CONFIG.owner, repo: CONFIG.repo };
-      }
+      if (CONFIG.owner && CONFIG.repo) return { owner: CONFIG.owner, repo: CONFIG.repo };
       const host = location.hostname;
-      if (!host.endsWith('.github.io')) {
-        throw new Error('Custom domain: điền owner/repo trong CONFIG');
-      }
+      if (!host.endsWith('.github.io')) throw new Error('Custom domain: điền owner/repo trong CONFIG');
       const owner = host.replace('.github.io', '');
       const parts = location.pathname.split('/').filter(Boolean);
       const isUserSite = parts.length === 0 || parts[0].endsWith('.html');
-      const repo = isUserSite ? `${owner}.github.io` : parts[0];
-      return { owner, repo };
+      return { owner, repo: isUserSite ? `${owner}.github.io` : parts[0] };
     }
 
-    // ---------- Format tên file thành title đẹp ----------
     function formatName(name) {
-      return name
-        .replace(/\.html$/, '')
-        .replace(/[-_]+/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim()
+      return name.replace(/\.html$/, '').replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
         .replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    // ---------- Fetch danh sách file ----------
     async function fetchFileList(owner, repo) {
       const cacheKey = `ghlist:${owner}/${repo}`;
       try {
         const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-        if (cached && Date.now() - cached.ts < CONFIG.cacheTTL) {
-          return cached.data;
-        }
+        if (cached && Date.now() - cached.ts < CONFIG.cacheTTL) return cached.data;
       } catch {}
 
       const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/`, {
         headers: { 'Accept': 'application/vnd.github+json' }
       });
-
       if (!res.ok) {
         if (res.status === 403) throw new Error('GitHub API hết lượt (60 req/giờ). Đợi 1 lát rồi thử lại.');
         if (res.status === 404) throw new Error('Không tìm thấy repo. Kiểm tra owner/repo trong CONFIG.');
@@ -427,57 +404,39 @@
 
       const arr = await res.json();
       const files = arr
-        .filter(f =>
-          f.type === 'file' &&
-          f.name.endsWith('.html') &&
-          !CONFIG.exclude.includes(f.name) &&
-          !f.name.startsWith('.')
-        )
+        .filter(f => f.type === 'file' && f.name.endsWith('.html') &&
+                     !CONFIG.exclude.includes(f.name) && !f.name.startsWith('.'))
         .map(f => ({
           name: f.name,
           url: './' + f.name,
           rawUrl: f.download_url,
-          icon: CONFIG.defaultIcon,
           fallbackTitle: formatName(f.name)
         }))
         .sort((a, b) => a.name.localeCompare(b.name));
 
-      try {
-        localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data: files }));
-      } catch {}
+      try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data: files })); } catch {}
       return files;
     }
 
-    // ---------- Fetch <title> từ file ----------
     async function fetchTitle(file) {
       const cacheKey = `ghtitle:${file.rawUrl}`;
       try {
         const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
         if (cached && Date.now() - cached.ts < CONFIG.cacheTTL * 6) return cached.title;
       } catch {}
-
       try {
         const res = await fetch(file.rawUrl);
         if (!res.ok) throw new Error();
         const html = await res.text();
         const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
         const title = m ? m[1].trim() : file.fallbackTitle;
-        try {
-          localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), title }));
-        } catch {}
+        try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), title })); } catch {}
         return title;
-      } catch {
-        return file.fallbackTitle;
-      }
+      } catch { return file.fallbackTitle; }
     }
 
-    // ---------- Render ----------
     function renderEmpty(message, icon = '📭') {
-      $list.innerHTML = `
-        <div class="state">
-          <div class="state-icon">${icon}</div>
-          ${message}
-        </div>`;
+      $list.innerHTML = `<div class="state"><div class="state-icon">${icon}</div>${message}</div>`;
     }
 
     function renderList(files) {
@@ -485,7 +444,6 @@
         renderEmpty('Chưa có video nào. Tạo file <code>.html</code> đầu tiên để bắt đầu!');
         return;
       }
-
       $list.innerHTML = '';
       files.forEach((f, i) => {
         const a = document.createElement('a');
@@ -493,7 +451,7 @@
         a.href = f.url;
         a.style.animationDelay = `${Math.min(i * 40, 400)}ms`;
         a.innerHTML = `
-          <div class="item-icon">${f.icon}</div>
+          <div class="item-icon">${ROBLOX_ICON}</div>
           <div class="item-content">
             <div class="item-title" data-title>${f.fallbackTitle}</div>
             <div class="item-file">${f.name}</div>
@@ -504,7 +462,6 @@
       });
     }
 
-    // ---------- Main ----------
     async function load(isRefresh = false) {
       if (isRefresh) {
         Object.keys(localStorage)
@@ -520,7 +477,6 @@
       try {
         const { owner, repo } = detectRepo();
         $repoLink.href = `https://github.com/${owner}/${repo}`;
-
         const files = await fetchFileList(owner, repo);
         renderList(files);
         setState('', `Tổng ${files.length} video Roblox`);
