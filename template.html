@@ -78,11 +78,7 @@
       box-shadow: 0 8px 24px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
 
-    .logo svg {
-      width: 30px;
-      height: 30px;
-      fill: #fff;
-    }
+    .logo svg { width: 30px; height: 30px; fill: #fff; }
 
     h1 {
       font-size: clamp(20px, 4.5vw, 26px);
@@ -193,6 +189,7 @@
       transform: translateX(4px);
     }
 
+    /* ====== NÚT LINK4M ĐẶC BIỆT ====== */
     .btn-special {
       background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #075985 100%);
       border: 1px solid rgba(125, 211, 252, 0.35);
@@ -222,16 +219,10 @@
       color: #fff;
     }
 
-    .btn-special .btn-icon {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
+    .btn-special .btn-icon { background: rgba(255, 255, 255, 0.15); }
     .btn-special .btn-title,
     .btn-special .btn-desc,
-    .btn-special .btn-arrow {
-      color: #fff;
-    }
-
+    .btn-special .btn-arrow { color: #fff; }
     .btn-special .btn-desc { opacity: 0.85; }
     .btn-special:hover .btn-arrow { color: #fff; }
 
@@ -251,29 +242,6 @@
       border: 1px solid rgba(255, 255, 255, 0.35);
       z-index: 2;
     }
-
-    .bumx-group {
-      display: flex;
-      gap: 10px;
-    }
-
-    .bumx-group .btn {
-      flex: 1;
-      min-width: 0;
-      padding: 14px 14px;
-      gap: 10px;
-    }
-
-    .bumx-group .btn-icon {
-      width: 34px;
-      height: 34px;
-      font-size: 17px;
-    }
-
-    .bumx-group .btn-title { font-size: 13px; }
-    .bumx-group .btn-desc  { font-size: 11px; }
-    .bumx-group .btn-num   { width: 22px; height: 22px; font-size: 11px; }
-    .bumx-group .btn-arrow { display: none; }
 
     footer {
       text-align: center;
@@ -339,18 +307,8 @@
       .btn-icon { width: 36px; height: 36px; font-size: 18px; }
       .btn-special { padding: 18px 16px; }
       .btn-title { font-size: 14px; }
-      .bumx-group { gap: 8px; }
-      .bumx-group .btn { padding: 12px 10px; gap: 8px; }
-      .bumx-group .btn-icon { width: 30px; height: 30px; font-size: 15px; }
-      .bumx-group .btn-title { font-size: 12px; }
-      .bumx-group .btn-desc { display: none; }
       .logo { width: 54px; height: 54px; }
       .logo svg { width: 26px; height: 26px; }
-    }
-
-    @media (max-width: 360px) {
-      .bumx-group { flex-direction: column; }
-      .bumx-group .btn-desc { display: block; }
     }
   </style>
 </head>
@@ -377,17 +335,23 @@
 
   <script>
   (() => {
+    /* =========================================================
+       ⬇️⬇️⬇️  CHỈ SỬA PHẦN NÀY MỖI KHI LÀM VIDEO MỚI  ⬇️⬇️⬇️
+       ========================================================= */
     const LINKS = {
-      link4m: "https://pastefy.app",
-      bumxReview: "",
-      bumxCode: "",
-      bbmkts: "",
+      link4m:      "https://link4m.co/abcxyz",
+      bumxReview:  "https://bumx.co/review-abcxyz",
+      bbmkts:      "",
       linkforearn: ""
     };
+    /* =========================================================
+       ⬆️⬆️⬆️  KHÔNG CẦN SỬA GÌ BÊN DƯỚI  ⬆️⬆️⬆️
+       ========================================================= */
 
     const container = document.getElementById('links');
     const buttons = [];
 
+    // 1. Link4M
     if (LINKS.link4m.trim()) {
       buttons.push(`
         <a class="btn btn-special" href="${LINKS.link4m.trim()}" target="_blank" rel="noopener noreferrer">
@@ -403,38 +367,22 @@
       `);
     }
 
-    const bumxReview = LINKS.bumxReview.trim();
-    const bumxCode   = LINKS.bumxCode.trim();
-    if (bumxReview || bumxCode) {
-      let h = '<div class="bumx-group">';
-      if (bumxReview) {
-        h += `
-          <a class="btn" href="${bumxReview}" target="_blank" rel="noopener noreferrer">
-            <span class="btn-num">2</span>
-            <span class="btn-icon">🎬</span>
-            <span class="btn-content">
-              <span class="btn-title">Bumx Review</span>
-              <span class="btn-desc">Xem review</span>
-            </span>
-          </a>
-        `;
-      }
-      if (bumxCode) {
-        h += `
-          <a class="btn" href="${bumxCode}" target="_blank" rel="noopener noreferrer">
-            <span class="btn-num">2</span>
-            <span class="btn-icon">🔑</span>
-            <span class="btn-content">
-              <span class="btn-title">Bumx Lấy mã</span>
-              <span class="btn-desc">Lấy mã tải</span>
-            </span>
-          </a>
-        `;
-      }
-      h += '</div>';
-      buttons.push(h);
+    // 2. Bumx Review
+    if (LINKS.bumxReview.trim()) {
+      buttons.push(`
+        <a class="btn" href="${LINKS.bumxReview.trim()}" target="_blank" rel="noopener noreferrer">
+          <span class="btn-num">2</span>
+          <span class="btn-icon">🎬</span>
+          <span class="btn-content">
+            <span class="btn-title">Bumx Review</span>
+            <span class="btn-desc">Xem review trước khi tải</span>
+          </span>
+          <span class="btn-arrow">→</span>
+        </a>
+      `);
     }
 
+    // 3. Bbmkts
     if (LINKS.bbmkts.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.bbmkts.trim()}" target="_blank" rel="noopener noreferrer">
@@ -449,6 +397,7 @@
       `);
     }
 
+    // 4. LinkForEarn
     if (LINKS.linkforearn.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.linkforearn.trim()}" target="_blank" rel="noopener noreferrer">
@@ -479,83 +428,6 @@
   })();
   </script>
 
-  <div class="music-player" style="position:fixed;top:16px;right:16px;z-index:9999;">
-    <button class="music-btn is-muted" id="music-toggle" aria-label="Bật nhạc" title="Bật nhạc nền" style="width:44px;height:44px;border-radius:50%;background:rgba(15,23,42,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(56,189,248,.35);color:#7dd3fc;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s ease;box-shadow:0 4px 16px rgba(14,165,233,.25), inset 0 1px 0 rgba(255,255,255,.1);padding:0;position:relative;">
-      <svg class="icon-unmuted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;fill:currentColor;display:none;">
-        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-      </svg>
-      <svg class="icon-muted" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;fill:currentColor;display:block;">
-        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
-      </svg>
-    </button>
-  </div>
-
-  <div id="yt-music-container" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"></div>
-
-  <script>
-  (function() {
-    const VIDEO_ID = 'I1nee4q6nrk';
-    let player = null;
-    let isMuted = true;
-    const btn = document.getElementById('music-toggle');
-
-    function updateUI() {
-      btn.classList.toggle('is-muted', isMuted);
-      btn.setAttribute('aria-label', isMuted ? 'Bật nhạc' : 'Tắt nhạc');
-      btn.setAttribute('title', isMuted ? 'Bật nhạc nền' : 'Tắt nhạc nền');
-      const unmutedIcon = btn.querySelector('.icon-unmuted');
-      const mutedIcon = btn.querySelector('.icon-muted');
-      if (unmutedIcon && mutedIcon) {
-        unmutedIcon.style.display = isMuted ? 'none' : 'block';
-        mutedIcon.style.display = isMuted ? 'block' : 'none';
-      }
-      btn.style.borderColor = isMuted ? 'rgba(56,189,248,.35)' : 'rgba(14,165,233,.7)';
-    }
-
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-
-    window.onYouTubeIframeAPIReady = function() {
-      player = new YT.Player('yt-music-container', {
-        height: '1',
-        width: '1',
-        videoId: VIDEO_ID,
-        playerVars: {
-          autoplay: 1,
-          loop: 1,
-          playlist: VIDEO_ID,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          modestbranding: 1,
-          playsinline: 1,
-          rel: 0
-        },
-        events: {
-          onReady: function(e) {
-            e.target.setVolume(50);
-            e.target.mute();
-            e.target.playVideo();
-            updateUI();
-          },
-          onStateChange: function(e) {
-            if (e.data === 0) e.target.playVideo();
-          }
-        }
-      });
-    };
-
-    btn.addEventListener('click', function() {
-      if (!player || !player.mute) return;
-      isMuted = !isMuted;
-      if (isMuted) player.mute();
-      else player.unMute();
-      updateUI();
-    });
-
-    updateUI();
-  })();
-  </script>
+  <!-- Nếu bạn muốn thêm nhạc nền, dán khối MUSIC PLAYER (đã đưa ở câu trước) vào đây -->
 </body>
 </html>
