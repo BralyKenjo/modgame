@@ -1,467 +1,41 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#070b14">
-  <title>Roblox Mod Hub</title>
-  <meta name="description" content="Tổng hợp script, mod, hack Roblox mới nhất">
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg-0: #070b14;
-      --bg-1: #0f172a;
-      --bg-2: #1e293b;
-      --border: rgba(56, 189, 248, 0.12);
-      --border-hover: rgba(56, 189, 248, 0.45);
-      --text-1: #e2e8f0;
-      --text-2: #94a3b8;
-      --text-3: #64748b;
-      --accent: #0ea5e9;
-      --accent-2: #0284c7;
-      --accent-soft: #7dd3fc;
-      --accent-glow: rgba(14, 165, 233, 0.28);
-      --radius: 14px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      background: var(--bg-0);
-      color: var(--text-1);
-      min-height: 100vh;
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 700px 450px at 20% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
-        radial-gradient(ellipse 600px 450px at 80% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 60px 20px 80px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 44px;
-      animation: fadeUp 0.5s ease-out both;
-    }
-
-    /* ====== LOGO ====== */
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      background: #000;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(14, 165, 233, 0.25);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      overflow: hidden;
-      padding: 4px;
-    }
-
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 16px;
-    }
-
-    h1 {
-      font-size: clamp(24px, 5vw, 32px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #f1f5f9, #94a3b8);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: var(--text-2);
-      font-size: 14px;
-    }
-
-    .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 28px;
-      font-size: 13px;
-      color: var(--text-3);
-      min-height: 20px;
-      animation: fadeUp 0.5s ease-out 0.1s both;
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .dot.loading { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
-    .dot.error   { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.6); }
-
-    .list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 20px;
-      background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: fadeUp 0.4s ease-out both;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.07), transparent 50%);
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-
-    .item:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
-    }
-
-    .item:hover::before { opacity: 1; }
-    .item:active { transform: translateY(0); }
-
-    .item-icon {
-      position: relative;
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: #000;
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s;
-      overflow: hidden;
-      padding: 3px;
-    }
-
-    .item-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .item:hover .item-icon { transform: scale(1.08) rotate(-4deg); }
-
-    .item-content {
-      position: relative;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .item-title {
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--text-1);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 3px;
-    }
-
-    .item-file {
-      font-size: 12px;
-      color: var(--text-3);
-      font-family: ui-monospace, "SF Mono", Consolas, monospace;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .item-arrow {
-      flex-shrink: 0;
-      color: var(--text-3);
-      transition: all 0.25s;
-      font-size: 18px;
-    }
-
-    .item:hover .item-arrow {
-      color: var(--accent);
-      transform: translateX(4px);
-    }
-
-    .skeleton {
-      height: 80px;
-      border-radius: var(--radius);
-      background: linear-gradient(90deg, var(--bg-1) 25%, var(--bg-2) 50%, var(--bg-1) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      border: 1px solid var(--border);
-    }
-
-    .state {
-      text-align: center;
-      padding: 48px 24px;
-      background: var(--bg-1);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      color: var(--text-2);
-      font-size: 14px;
-    }
-
-    .state-icon {
-      font-size: 40px;
-      margin-bottom: 12px;
-      opacity: 0.6;
-    }
-
-    .refresh {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: 32px auto 0;
-      padding: 10px 18px;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-2);
-      border-radius: 10px;
-      font-size: 13px;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .refresh:hover {
-      border-color: var(--border-hover);
-      color: var(--text-1);
-      background: rgba(14, 165, 233, 0.06);
-    }
-
-    .refresh:disabled { opacity: 0.4; cursor: not-allowed; }
-    .refresh.spinning .refresh-icon { animation: spin 0.8s linear infinite; }
-
-    footer {
-      text-align: center;
-      margin-top: 56px;
-      font-size: 12px;
-      color: var(--text-3);
-    }
-
-    footer a {
-      color: var(--text-2);
-      text-decoration: none;
-      border-bottom: 1px dotted var(--border);
-    }
-
-    footer a:hover { color: var(--accent); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.4; }
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 480px) {
-      .wrap { padding: 40px 16px 60px; }
-      .item { padding: 16px; gap: 14px; }
-      .item-icon { width: 40px; height: 40px; }
-      .logo { width: 70px; height: 70px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <!-- Đã trỏ đến logo.jpeg -->
-      <div class="logo">
-        <img src="./assets/logo.jpeg" alt="Logo">
-      </div>
-      <h1>Roblox Mod Hub</h1>
-      <p class="subtitle">Tổng hợp script, mod, hack Roblox mới nhất</p>
-    </header>
-
-    <div class="status-bar">
-      <span class="dot loading" id="dot"></span>
-      <span id="status">Đang tải danh sách...</span>
-    </div>
-
-    <div class="list" id="list">
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-      <div class="skeleton"></div>
-    </div>
-
-    <button class="refresh" id="refresh" hidden>
-      <span class="refresh-icon">🔄</span>
-      <span>Làm mới danh sách</span>
-    </button>
-
-    <footer>
-      Cập nhật tự động từ <a href="#" id="repo-link" target="_blank" rel="noopener">GitHub</a>
-    </footer>
-  </div>
-
-  <script>
+<script>
   (async () => {
-    const CONFIG = {
-      owner: '',
-      repo: '',
-      exclude: ['index.html', 'template.html', '404.html'],
-      cacheTTL: 10 * 60 * 1000,
-      fetchTitles: true
-    };
-
-    // Đã trỏ đến logo.jpeg cho từng item
     const ITEM_ICON = `<img src="./assets/logo.jpeg" alt="">`;
-
     const $dot       = document.getElementById('dot');
     const $status    = document.getElementById('status');
     const $list      = document.getElementById('list');
     const $refresh   = document.getElementById('refresh');
-    const $repoLink  = document.getElementById('repo-link');
 
     const setState = (state, text) => {
       $dot.className = 'dot ' + state;
       $status.textContent = text;
     };
 
-    function detectRepo() {
-      if (CONFIG.owner && CONFIG.repo) return { owner: CONFIG.owner, repo: CONFIG.repo };
-      const host = location.hostname;
-      if (!host.endsWith('.github.io')) throw new Error('Custom domain: điền owner/repo trong CONFIG');
-      const owner = host.replace('.github.io', '');
-      const parts = location.pathname.split('/').filter(Boolean);
-      const isUserSite = parts.length === 0 || parts[0].endsWith('.html');
-      return { owner, repo: isUserSite ? `${owner}.github.io` : parts[0] };
-    }
-
-    function formatName(name) {
-      return name.replace(/\.html$/, '').replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim()
-        .replace(/\b\w/g, c => c.toUpperCase());
-    }
-
-    async function fetchFileList(owner, repo) {
-      const cacheKey = `ghlist:${owner}/${repo}`;
-      try {
-        const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-        if (cached && Date.now() - cached.ts < CONFIG.cacheTTL) return cached.data;
-      } catch {}
-
-      const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/`, {
-        headers: { 'Accept': 'application/vnd.github+json' }
-      });
-      if (!res.ok) {
-        if (res.status === 403) throw new Error('GitHub API hết lượt (60 req/giờ). Đợi 1 lát rồi thử lại.');
-        if (res.status === 404) throw new Error('Không tìm thấy repo. Kiểm tra owner/repo trong CONFIG.');
-        throw new Error('GitHub API lỗi ' + res.status);
-      }
-
-      const arr = await res.json();
-      const files = arr
-        .filter(f => f.type === 'file' && f.name.endsWith('.html') &&
-                     !CONFIG.exclude.includes(f.name) && !f.name.startsWith('.'))
-        .map(f => ({
-          name: f.name,
-          url: './' + f.name,
-          rawUrl: f.download_url,
-          fallbackTitle: formatName(f.name)
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
-
-      try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data: files })); } catch {}
-      return files;
-    }
-
-    async function fetchTitle(file) {
-      const cacheKey = `ghtitle:${file.rawUrl}`;
-      try {
-        const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-        if (cached && Date.now() - cached.ts < CONFIG.cacheTTL * 6) return cached.title;
-      } catch {}
-      try {
-        const res = await fetch(file.rawUrl);
-        if (!res.ok) throw new Error();
-        const html = await res.text();
-        const m = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-        const title = m ? m[1].trim() : file.fallbackTitle;
-        try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), title })); } catch {}
-        return title;
-      } catch { return file.fallbackTitle; }
-    }
-
     function renderEmpty(message, icon = '📭') {
       $list.innerHTML = `<div class="state"><div class="state-icon">${icon}</div>${message}</div>`;
     }
 
-    function renderList(files) {
-      if (files.length === 0) {
+    function renderList(videos) {
+      if (videos.length === 0) {
         renderEmpty('Chưa có video nào. Tạo file <code>.html</code> đầu tiên để bắt đầu!');
         return;
       }
       $list.innerHTML = '';
-      files.forEach((f, i) => {
+      videos.forEach((v, i) => {
         const a = document.createElement('a');
         a.className = 'item';
-        a.href = f.url;
+        a.href = './' + v.name; // Trỏ đến file HTML
         a.style.animationDelay = `${Math.min(i * 40, 400)}ms`;
+        
+        // Định dạng ngày tháng
+        const date = new Date(v.updatedAt);
+        const dateStr = date.toLocaleDateString('vi-VN');
+        
         a.innerHTML = `
           <div class="item-icon">${ITEM_ICON}</div>
           <div class="item-content">
-            <div class="item-title" data-title>${f.fallbackTitle}</div>
-            <div class="item-file">${f.name}</div>
+            <div class="item-title">${v.title}</div>
+            <div class="item-file">${dateStr} • ${v.name}</div>
           </div>
           <div class="item-arrow">→</div>
         `;
@@ -471,9 +45,7 @@
 
     async function load(isRefresh = false) {
       if (isRefresh) {
-        Object.keys(localStorage)
-          .filter(k => k.startsWith('ghlist:') || k.startsWith('ghtitle:'))
-          .forEach(k => localStorage.removeItem(k));
+        localStorage.removeItem('videosData');
       }
 
       $refresh.hidden = true;
@@ -482,20 +54,23 @@
       $list.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
 
       try {
-        const { owner, repo } = detectRepo();
-        $repoLink.href = `https://github.com/${owner}/${repo}`;
-        const files = await fetchFileList(owner, repo);
-        renderList(files);
-        setState('', `Tổng ${files.length} video Roblox`);
+        // Kiểm tra cache local để load cho nhanh (không cần gọi API)
+        let videos = null;
+        const cached = localStorage.getItem('videosData');
+        if (cached && !isRefresh) {
+          videos = JSON.parse(cached);
+        } else {
+          // Tải file videos.json tĩnh (ko tốn rate limit)
+          const res = await fetch(`./videos.json?t=${Date.now()}`);
+          if (!res.ok) throw new Error('Không tải được videos.json. Hãy chờ Action chạy xong.');
+          videos = await res.json();
+          localStorage.setItem('videosData', JSON.stringify(videos));
+        }
+
+        renderList(videos);
+        setState('', `Tổng ${videos.length} video Roblox`);
         $refresh.hidden = false;
 
-        if (CONFIG.fetchTitles && files.length > 0) {
-          const titleEls = $list.querySelectorAll('[data-title]');
-          await Promise.all(files.map(async (f, i) => {
-            const title = await fetchTitle(f);
-            if (titleEls[i]) titleEls[i].textContent = title;
-          }));
-        }
       } catch (e) {
         setState('error', e.message);
         renderEmpty(e.message, '⚠️');
@@ -509,5 +84,3 @@
     load(false);
   })();
   </script>
-</body>
-</html>
