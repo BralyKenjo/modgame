@@ -1,4 +1,3 @@
-# .github/workflows/update-videos.yml
 name: Update videos.json
 
 on:
@@ -6,13 +5,14 @@ on:
     branches:
       - main
     paths:
-      - '*.html' # Chỉ chạy khi có file html mới thay đổi
+      - '*.html'
+  workflow_dispatch: # ← thêm dòng này để có nút bấm chạy tay
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Cần quyền ghi để commit đè file videos.json
+      contents: write # ← bắt buộc, nếu thiếu sẽ không commit được
 
     steps:
       - name: Checkout code
