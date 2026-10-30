@@ -1,4 +1,358 @@
-<script>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b14">
+  <title>Roblox Mod Hub</title>
+  <meta name="description" content="Tổng hợp script, mod, hack Roblox mới nhất">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0: #070b14;
+      --bg-1: #0f172a;
+      --bg-2: #1e293b;
+      --border: rgba(56, 189, 248, 0.12);
+      --border-hover: rgba(56, 189, 248, 0.45);
+      --text-1: #e2e8f0;
+      --text-2: #94a3b8;
+      --text-3: #64748b;
+      --accent: #0ea5e9;
+      --accent-2: #0284c7;
+      --accent-soft: #7dd3fc;
+      --accent-glow: rgba(14, 165, 233, 0.28);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg-0);
+      color: var(--text-1);
+      min-height: 100vh;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 700px 450px at 20% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
+        radial-gradient(ellipse 600px 450px at 80% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 44px;
+      animation: fadeUp 0.5s ease-out both;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background: #000;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(14, 165, 233, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      overflow: hidden;
+      padding: 4px;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--text-2);
+      font-size: 14px;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 13px;
+      color: var(--text-3);
+      min-height: 20px;
+      animation: fadeUp 0.5s ease-out 0.1s both;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .dot.loading { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
+    .dot.error   { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.6); }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeUp 0.4s ease-out both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.07), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
+    }
+
+    .item:hover::before { opacity: 1; }
+    .item:active { transform: translateY(0); }
+
+    .item-icon {
+      position: relative;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #000;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s;
+      overflow: hidden;
+      padding: 3px;
+    }
+
+    .item-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .item:hover .item-icon { transform: scale(1.08) rotate(-4deg); }
+
+    .item-content {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+    }
+
+    .item-file {
+      font-size: 12px;
+      color: var(--text-3);
+      font-family: ui-monospace, "SF Mono", Consolas, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .item-arrow {
+      flex-shrink: 0;
+      color: var(--text-3);
+      transition: all 0.25s;
+      font-size: 18px;
+    }
+
+    .item:hover .item-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .skeleton {
+      height: 80px;
+      border-radius: var(--radius);
+      background: linear-gradient(90deg, var(--bg-1) 25%, var(--bg-2) 50%, var(--bg-1) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border: 1px solid var(--border);
+    }
+
+    .state {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--bg-1);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      color: var(--text-2);
+      font-size: 14px;
+    }
+
+    .state-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    .refresh {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 32px auto 0;
+      padding: 10px 18px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .refresh:hover {
+      border-color: var(--border-hover);
+      color: var(--text-1);
+      background: rgba(14, 165, 233, 0.06);
+    }
+
+    .refresh:disabled { opacity: 0.4; cursor: not-allowed; }
+    .refresh.spinning .refresh-icon { animation: spin 0.8s linear infinite; }
+
+    footer {
+      text-align: center;
+      margin-top: 56px;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    footer a {
+      color: var(--text-2);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--border);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.4; }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .wrap { padding: 40px 16px 60px; }
+      .item { padding: 16px; gap: 14px; }
+      .item-icon { width: 40px; height: 40px; }
+      .logo { width: 70px; height: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <img src="./assets/logo.jpeg" alt="Logo">
+      </div>
+      <h1>Roblox Mod Hub</h1>
+      <p class="subtitle">Tổng hợp script, mod, hack Roblox mới nhất</p>
+    </header>
+
+    <div class="status-bar">
+      <span class="dot loading" id="dot"></span>
+      <span id="status">Đang tải danh sách...</span>
+    </div>
+
+    <div class="list" id="list">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+
+    <button class="refresh" id="refresh" hidden>
+      <span class="refresh-icon">🔄</span>
+      <span>Làm mới danh sách</span>
+    </button>
+
+    <footer>
+      © Bản quyền thuộc về <a href="https://www.tiktok.com/@zankyo2114" target="_blank" rel="noopener noreferrer">@zankyo2114</a>
+    </footer>
+  </div>
+
+  <script>
   (async () => {
     const ITEM_ICON = `<img src="./assets/logo.jpeg" alt="">`;
     const $dot       = document.getElementById('dot');
@@ -6,30 +360,35 @@
     const $list      = document.getElementById('list');
     const $refresh   = document.getElementById('refresh');
 
+    // Hàm đổi trạng thái chấm tròn (xanh/vàng/đỏ)
     const setState = (state, text) => {
-      $dot.className = 'dot ' + state;
-      $status.textContent = text;
+      if ($dot) $dot.className = 'dot ' + state;
+      if ($status) $status.textContent = text;
     };
 
+    // Hàm hiển thị thông báo lỗi/trống
     function renderEmpty(message, icon = '📭') {
+      if (!$list) return;
       $list.innerHTML = `<div class="state"><div class="state-icon">${icon}</div>${message}</div>`;
     }
 
+    // Hàm render danh sách video
     function renderList(videos) {
-      if (videos.length === 0) {
-        renderEmpty('Chưa có video nào. Tạo file <code>.html</code> đầu tiên để bắt đầu!');
+      if (!videos || videos.length === 0) {
+        renderEmpty('Chưa có video nào. Hãy tạo file <code>.html</code> và đợi Action chạy!');
         return;
       }
+      
       $list.innerHTML = '';
       videos.forEach((v, i) => {
         const a = document.createElement('a');
         a.className = 'item';
-        a.href = './' + v.name; // Trỏ đến file HTML
+        a.href = './' + v.name; 
         a.style.animationDelay = `${Math.min(i * 40, 400)}ms`;
         
-        // Định dạng ngày tháng
+        // Format ngày tháng
         const date = new Date(v.updatedAt);
-        const dateStr = date.toLocaleDateString('vi-VN');
+        const dateStr = isNaN(date) ? '' : date.toLocaleDateString('vi-VN');
         
         a.innerHTML = `
           <div class="item-icon">${ITEM_ICON}</div>
@@ -43,44 +402,67 @@
       });
     }
 
+    // Hàm tải dữ liệu chính
     async function load(isRefresh = false) {
       if (isRefresh) {
         localStorage.removeItem('videosData');
       }
 
-      $refresh.hidden = true;
-      $refresh.classList.add('spinning');
+      if ($refresh) {
+        $refresh.hidden = true;
+        $refresh.classList.add('spinning');
+      }
+      
       setState('loading', 'Đang tải danh sách...');
-      $list.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+      if ($list) {
+        $list.innerHTML = '<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>';
+      }
 
       try {
-        // Kiểm tra cache local để load cho nhanh (không cần gọi API)
         let videos = null;
         const cached = localStorage.getItem('videosData');
+        
+        // Nếu có cache và không phải bấm làm mới -> load từ cache
         if (cached && !isRefresh) {
           videos = JSON.parse(cached);
         } else {
-          // Tải file videos.json tĩnh (ko tốn rate limit)
+          // Tải file tĩnh videos.json
           const res = await fetch(`./videos.json?t=${Date.now()}`);
-          if (!res.ok) throw new Error('Không tải được videos.json. Hãy chờ Action chạy xong.');
+          
+          if (!res.ok) {
+            if (res.status === 404) {
+              throw new Error('Chưa có file videos.json. Hãy đợi GitHub Action chạy xong (xem tab Actions).');
+            }
+            throw new Error('Lỗi tải dữ liệu: ' + res.status);
+          }
+          
           videos = await res.json();
           localStorage.setItem('videosData', JSON.stringify(videos));
         }
 
         renderList(videos);
-        setState('', `Tổng ${videos.length} video Roblox`);
-        $refresh.hidden = false;
+        setState('', `Tổng ${videos.length} video`);
+        
+        if ($refresh) $refresh.hidden = false;
 
       } catch (e) {
-        setState('error', e.message);
+        setState('error', 'Lỗi tải dữ liệu');
+        // In lỗi ra màn hình cho dễ nhìn
         renderEmpty(e.message, '⚠️');
-        $refresh.hidden = false;
+        if ($refresh) $refresh.hidden = false;
       } finally {
-        $refresh.classList.remove('spinning');
+        if ($refresh) $refresh.classList.remove('spinning');
       }
     }
 
-    $refresh.addEventListener('click', () => load(true));
+    // Gán sự kiện cho nút Làm mới
+    if ($refresh) {
+      $refresh.addEventListener('click', () => load(true));
+    }
+    
+    // Bắt đầu chạy
     load(false);
   })();
   </script>
+</body>
+</html>
