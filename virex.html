@@ -32,6 +32,7 @@
       min-height: 100vh; display: flex; flex-direction: column;
     }
 
+    /* HEADER & LOGO */
     header { text-align: center; margin-bottom: 30px; animation: fadeUp 0.5s ease-out both; }
     .logo {
       display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px;
@@ -45,6 +46,7 @@
       -webkit-text-fill-color: transparent;
     }
 
+    /* NÚT LINK RÚT GỌN */
     .links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
     .btn {
       display: flex; align-items: center; gap: 14px; padding: 16px 18px;
@@ -62,6 +64,7 @@
     .btn-special .btn-num, .btn-special .btn-icon { background: rgba(255,255,255,0.2); color: #fff; border-color: transparent; }
     .btn-special .btn-title, .btn-special .btn-desc { color: #fff; }
 
+    /* KHU VỰC NHẬP MẬT KHẨU */
     .password-section {
       background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 24px 20px; text-align: center; animation: fadeUp 0.5s ease-out 0.2s both;
@@ -82,6 +85,7 @@
     .input-group button:hover { background: var(--accent-2); }
     .msg { font-size: 13px; margin-top: 12px; font-weight: 600; color: #f87171; min-height: 20px; }
 
+    /* KHUNG CHỨA SCRIPT KẾT QUẢ */
     #result-area { margin-top: 24px; display: none; }
     .script-box {
       background: var(--bg-1); border: 1px solid var(--accent); border-radius: var(--radius);
@@ -117,12 +121,14 @@
       <h1>Vượt 1 trong 4 link này để lấy script nhé</h1>
     </header>
 
+    <!-- KHU VỰC 4 NÚT LINK -->
     <div class="links" id="links"></div>
 
+    <!-- KHU VỰC NHẬP MẬT KHẨU -->
     <div class="password-section">
       <h2>Nhập mật khẩu để lấy script ngay lập tức</h2>
       <p>Nếu bạn không có, hãy liên hệ với <a href="https://www.tiktok.com/@zankyo2114" target="_blank">tôi</a> để mua mật khẩu nhé.</p>
-
+      
       <div class="input-group">
         <input type="password" id="pwInput" placeholder="Nhập mật khẩu...">
         <button id="submitBtn">Lấy Script</button>
@@ -130,6 +136,7 @@
       <div class="msg" id="modalMsg"></div>
     </div>
 
+    <!-- KHUNG HIỂN THỊ SCRIPT SAU KHI MỞ KHÓA -->
     <div id="result-area"></div>
 
     <footer>
@@ -139,18 +146,21 @@
 
   <script>
   (() => {
+    // 4 Link rút gọn thật của bạn
     const RAW_LINKS = {
-      link4m: "https://link4m.net/JjumIuQ",
-      bumxReview: "https://linkfree.click/s/virexz1u19xrmvw042yq",
-      bbmkts: "https://subtounlock.com/8acd0",
+      link4m:      "https://link4m.net/JjumIuQ",
+      bumxReview:  "https://linkfree.click/s/virexz1u19xrmvw042yq",
+      bbmkts:      "https://subtounlock.com/8acd0",
       linkforearn: "http://linkforearn.com/iSIAC"
     };
 
+    // Link Cloudflare Worker của bạn
     const WORKER_URL = "https://modgame.phucpro4211.workers.dev/api/verify";
 
+    // Tự động lấy tên file làm ID (Ví dụ: virex.html -> ID là "virex")
     let filename = window.location.pathname.split('/').pop();
     let VIDEO_ID = filename.replace('.html', '');
-    if (!VIDEO_ID || VIDEO_ID === 'index') VIDEO_ID = 'default';
+    if (!VIDEO_ID || VIDEO_ID === 'index') VIDEO_ID = 'default'; 
 
     const container = document.getElementById('links');
     const pwInput = document.getElementById('pwInput');
@@ -158,6 +168,7 @@
     const modalMsg = document.getElementById('modalMsg');
     const resultArea = document.getElementById('result-area');
 
+    // --- 1. HIỂN THỊ 4 NÚT LINK ---
     const buttons = [];
     if (RAW_LINKS.link4m.trim()) {
       buttons.push(`<a class="btn btn-special" href="${RAW_LINKS.link4m.trim()}" target="_blank"><span class="btn-num">1</span><span class="btn-icon">⚡</span><span class="btn-content"><span class="btn-title">Link4M</span><span class="btn-desc">Dễ lấy mã</span></span></a>`);
@@ -173,6 +184,7 @@
     }
     container.innerHTML = buttons.join('');
 
+    // --- 2. XỬ LÝ NHẬP MẬT KHẨU ---
     submitBtn.addEventListener('click', async () => {
       const pw = pwInput.value.trim();
       if (!pw) return;
@@ -191,12 +203,15 @@
         const result = await res.json();
 
         if (res.ok && result.success) {
+          // ĐÚNG MẬT KHẨU
           modalMsg.textContent = '';
           submitBtn.textContent = 'Thành công!';
-          submitBtn.style.background = '#10b981';
+          submitBtn.style.background = '#10b981'; // Đổi màu xanh lá
           pwInput.disabled = true;
+          
           renderResult(result.type, result.content);
         } else {
+          // SAI MẬT KHẨU
           modalMsg.textContent = result.message || 'Sai mật khẩu!';
           submitBtn.disabled = false;
           submitBtn.textContent = 'Lấy Script';
@@ -212,9 +227,10 @@
       if (e.key === 'Enter') submitBtn.click();
     });
 
+    // --- 3. HIỂN THỊ KẾT QUẢ (SCRIPT HOẶC LINK) ---
     function renderResult(type, content) {
       resultArea.style.display = 'block';
-
+      
       if (type === 'link') {
         resultArea.innerHTML = `
           <a href="${content}" target="_blank" class="btn btn-special" style="justify-content:center;">
@@ -228,7 +244,8 @@
             <button class="copy-btn" id="copyBtn">📋 Copy Script</button>
           </div>
         `;
-
+        
+        // Gắn sự kiện copy
         document.getElementById('copyBtn').addEventListener('click', () => {
           const text = document.getElementById('script-text').innerText;
           navigator.clipboard.writeText(text).then(() => {
