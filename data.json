@@ -1,0 +1,8 @@
+{
+  ":chillihubv7.html": "script:loadstring(game:HttpGet(\"https://raw.githubusercontent.com/kadit9999/stealanegg/refs/heads/main/ChilliV5BaKhi.lua\"))()",
+  ":codium.html": "script:loadstring(game:HttpGet(\"https://getcodium.xyz/loader.luau\"))()",
+  ":randomfruit.html": "script:loadstring(game:HttpGet(\"https://raw.githubusercontent.com/WhiteX1208/Scripts/refs/heads/main/GachaScript.luau\"))()",
+  ":sena.html": "script:loadstring(game:HttpGet(\"https://senahub.xyz/senaexclusive\"))()",
+  ":venyx.html": "script:loadstring(game:HttpGet(\"https://raw.githubusercontent.com/tienkhanh1/Venyx/main/VenyxHub\"))()",
+  ":virex.html": "script:loadstring(game:HttpGet(\"https://cdn.luaprotect.dev/u/8660b0/AvrC3cs5mZ38jbnD\"))()"
+}
