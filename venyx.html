@@ -95,7 +95,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      flex: 1;
+      margin-bottom: 30px;
     }
 
     .btn {
@@ -242,9 +242,47 @@
       z-index: 2;
     }
 
+    /* ====== KHU VỰC NHẬP MẬT KHẨU ====== */
+    .password-section {
+      background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px 20px; text-align: center; animation: fadeUp 0.5s ease-out 0.2s both;
+    }
+    .password-section h2 { font-size: 18px; color: var(--accent-soft); margin-bottom: 8px; }
+    .password-section p { font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+    .password-section p a { color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 1px dotted var(--accent); }
+    .input-group { display: flex; gap: 10px; }
+    .input-group input {
+      flex: 1; padding: 12px 14px; background: var(--bg-0); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text-1); font-size: 15px; outline: none;
+    }
+    .input-group input:focus { border-color: var(--accent); }
+    .input-group button {
+      padding: 12px 20px; background: var(--accent); border: none; border-radius: 10px;
+      color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s;
+    }
+    .input-group button:hover { background: var(--accent-2); }
+    .msg { font-size: 13px; margin-top: 12px; font-weight: 600; color: #f87171; min-height: 20px; }
+
+    /* ====== KHUNG CHỨA SCRIPT KẾT QUẢ ====== */
+    #result-area { margin-top: 24px; display: none; }
+    .script-box {
+      background: var(--bg-1); border: 1px solid var(--accent); border-radius: var(--radius);
+      padding: 16px; animation: fadeUp 0.4s ease-out both;
+    }
+    .script-text {
+      font-family: monospace; font-size: 13px; color: #a7f3d0; word-break: break-all; white-space: pre-wrap;
+      background: var(--bg-0); padding: 12px; border-radius: 8px; max-height: 250px; overflow-y: auto;
+    }
+    .copy-btn {
+      margin-top: 12px; background: rgba(14, 165, 233, 0.15); color: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.3); padding: 12px; border-radius: 8px;
+      cursor: pointer; font-weight: 700; width: 100%; font-size: 15px; transition: 0.2s;
+    }
+    .copy-btn:hover { background: rgba(14, 165, 233, 0.25); color: #fff; }
+
     footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: auto;
       padding-top: 24px;
       border-top: 1px solid var(--border);
       font-size: 13px;
@@ -258,35 +296,6 @@
       gap: 6px;
       flex-wrap: wrap;
       justify-content: center;
-    }
-
-    footer a {
-      color: var(--accent-soft);
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    footer a:hover {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
-
-    .empty {
-      text-align: center;
-      padding: 48px 24px;
-      background: var(--bg-1);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      color: var(--text-2);
-      font-size: 14px;
-    }
-
-    .empty-icon {
-      font-size: 40px;
-      margin-bottom: 12px;
-      opacity: 0.6;
     }
 
     @keyframes fadeUp {
@@ -308,6 +317,7 @@
       .btn-title { font-size: 14px; }
       .logo { width: 54px; height: 54px; }
       .logo svg { width: 26px; height: 26px; }
+      .input-group { flex-direction: column; }
     }
   </style>
 </head>
@@ -322,7 +332,23 @@
       <h1>Vượt 1 trong 4 link này để lấy script nhé</h1>
     </header>
 
+    <!-- KHU VỰC 4 NÚT LINK -->
     <div class="links" id="links"></div>
+
+    <!-- KHU VỰC NHẬP MẬT KHẨU -->
+    <div class="password-section">
+      <h2>Nhập mật khẩu để lấy script ngay lập tức</h2>
+      <p>Nếu bạn không có, hãy liên hệ với <a href="https://www.tiktok.com/@zankyo2114" target="_blank">tôi</a> để mua mật khẩu nhé.</p>
+      
+      <div class="input-group">
+        <input type="password" id="pwInput" placeholder="Nhập mật khẩu...">
+        <button id="submitBtn">Lấy Script</button>
+      </div>
+      <div class="msg" id="modalMsg"></div>
+    </div>
+
+    <!-- KHUNG HIỂN THỊ SCRIPT KẾT QUẢ -->
+    <div id="result-area"></div>
 
     <footer>
       <span class="copyright-text">
@@ -333,6 +359,7 @@
 
   <script>
   (() => {
+    // 4 Link rút gọn thật của bạn
     const LINKS = {
       link4m: "https://link4m.net/v6xnG7",
       bumxReview: "https://linkfree.click/s/venyxz1u1ck9mvt2fm85",
@@ -340,7 +367,21 @@
       linkforearn: "http://linkforearn.com/hzLJrY"
     };
 
+    // Link Worker Cloudflare
+    const WORKER_URL = "https://modgame.phucpro4211.workers.dev/api/verify";
+
+    // Tự động lấy tên file làm ID (Ví dụ: venyx.html -> ID là "venyx")
+    let filename = window.location.pathname.split('/').pop();
+    let VIDEO_ID = filename.replace('.html', '');
+    if (!VIDEO_ID || VIDEO_ID === 'index') VIDEO_ID = 'default';
+
     const container = document.getElementById('links');
+    const pwInput = document.getElementById('pwInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const modalMsg = document.getElementById('modalMsg');
+    const resultArea = document.getElementById('result-area');
+
+    // --- 1. VẼ 4 NÚT LINK (Giữ nguyên giao diện của bạn) ---
     const buttons = [];
 
     if (LINKS.link4m.trim()) {
@@ -357,7 +398,6 @@
         </a>
       `);
     }
-
     if (LINKS.bumxReview.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.bumxReview.trim()}" target="_blank" rel="noopener noreferrer">
@@ -371,7 +411,6 @@
         </a>
       `);
     }
-
     if (LINKS.bbmkts.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.bbmkts.trim()}" target="_blank" rel="noopener noreferrer">
@@ -385,7 +424,6 @@
         </a>
       `);
     }
-
     if (LINKS.linkforearn.trim()) {
       buttons.push(`
         <a class="btn" href="${LINKS.linkforearn.trim()}" target="_blank" rel="noopener noreferrer">
@@ -401,17 +439,85 @@
     }
 
     if (buttons.length === 0) {
-      container.innerHTML = `
-        <div class="empty">
-          <div class="empty-icon">📭</div>
-          Chưa có link nào được thêm. Vui lòng quay lại sau.
-        </div>
-      `;
+      container.innerHTML = `<div class="empty"><div class="empty-icon">📭</div>Chưa có link nào được thêm.</div>`;
     } else {
       container.innerHTML = buttons.join('');
       container.querySelectorAll('.btn').forEach((el, i) => {
         el.style.animationDelay = `${i * 60}ms`;
       });
+    }
+
+    // --- 2. XỬ LÝ NHẬP MẬT KHẨU ---
+    submitBtn.addEventListener('click', async () => {
+      const pw = pwInput.value.trim();
+      if (!pw) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Đang kiểm tra...';
+      modalMsg.textContent = '';
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw, id: VIDEO_ID })
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          // ĐÚNG MẬT KHẨU
+          modalMsg.textContent = '';
+          submitBtn.textContent = 'Thành công!';
+          submitBtn.style.background = '#10b981';
+          pwInput.disabled = true;
+          
+          renderResult(result.type, result.content);
+        } else {
+          // SAI MẬT KHẨU
+          modalMsg.textContent = result.message || 'Sai mật khẩu!';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Lấy Script';
+        }
+      } catch (err) {
+        modalMsg.textContent = 'Lỗi kết nối, thử lại sau!';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Lấy Script';
+      }
+    });
+
+    pwInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitBtn.click();
+    });
+
+    // --- 3. HIỂN THỊ KẾT QUẢ ---
+    function renderResult(type, content) {
+      resultArea.style.display = 'block';
+      
+      if (type === 'link') {
+        resultArea.innerHTML = `
+          <a href="${content}" target="_blank" class="btn btn-special" style="justify-content:center;">
+            <span class="btn-title">🚀 Bấm vào đây để đến link gốc</span>
+          </a>
+        `;
+      } else if (type === 'script') {
+        resultArea.innerHTML = `
+          <div class="script-box">
+            <div class="script-text" id="script-text">${content}</div>
+            <button class="copy-btn" id="copyBtn">📋 Copy Script</button>
+          </div>
+        `;
+        
+        document.getElementById('copyBtn').addEventListener('click', () => {
+          const text = document.getElementById('script-text').innerText;
+          navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✅ Đã Copy!';
+            btn.style.color = '#10b981';
+            setTimeout(() => { btn.textContent = '📋 Copy Script'; btn.style.color = ''; }, 2000);
+          });
+        });
+      }
     }
   })();
   </script>
