@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070b14">
+  <title>Script Roblox - Video mới | Roblox Mod Hub</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-0: #070b14; --bg-1: #0f172a; --bg-2: #1e293b;
+      --border: rgba(56, 189, 248, 0.12); --border-hover: rgba(56, 189, 248, 0.45);
+      --text-1: #e2e8f0; --text-2: #94a3b8; --text-3: #64748b;
+      --accent: #0ea5e9; --accent-2: #0284c7; --accent-soft: #7dd3fc;
+      --accent-glow: rgba(14, 165, 233, 0.28); --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-0); color: var(--text-1); min-height: 100vh; line-height: 1.55;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 700px 450px at 50% 0%, rgba(14, 165, 233, 0.10), transparent 60%),
+                  radial-gradient(ellipse 600px 450px at 50% 100%, rgba(2, 132, 199, 0.08), transparent 60%);
+    }
+    .wrap {
+      position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 60px 20px 40px;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    header { text-align: center; margin-bottom: 30px; animation: fadeUp 0.5s ease-out both; }
+    .logo {
+      display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius: 16px;
+      margin-bottom: 18px; box-shadow: 0 8px 24px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+    .logo svg { width: 30px; height: 30px; fill: #fff; }
+    h1 {
+      font-size: clamp(20px, 4.5vw, 26px); font-weight: 800; line-height: 1.35;
+      background: linear-gradient(135deg, #f1f5f9, #cbd5e1); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+    .btn {
+      display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+      background: linear-gradient(180deg, var(--bg-1), var(--bg-2)); border: 1px solid var(--border);
+      border-radius: var(--radius); text-decoration: none; color: inherit; transition: all 0.25s;
+      animation: fadeUp 0.4s ease-out both; cursor: pointer;
+    }
+    .btn:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+    .btn-num { width: 26px; height: 26px; border-radius: 8px; background: rgba(14, 165, 233, 0.15); color: var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+    .btn-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(14, 165, 233, 0.1); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .btn-content { flex: 1; display: flex; flex-direction: column; text-align: left; }
+    .btn-title { font-weight: 600; font-size: 15px; color: var(--text-1); }
+    .btn-desc { font-size: 12px; color: var(--text-3); }
+    .btn-special { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: 1px solid rgba(125, 211, 252, 0.35); }
+    .btn-special .btn-num, .btn-special .btn-icon { background: rgba(255,255,255,0.2); color: #fff; border-color: transparent; }
+    .btn-special .btn-title, .btn-special .btn-desc { color: #fff; }
+
+    .password-section {
+      background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px 20px; text-align: center; animation: fadeUp 0.5s ease-out 0.2s both;
+    }
+    .password-section h2 { font-size: 18px; color: var(--accent-soft); margin-bottom: 8px; }
+    .password-section p { font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+    .password-section p a { color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 1px dotted var(--accent); }
+    .input-group { display: flex; gap: 10px; }
+    .input-group input {
+      flex: 1; padding: 12px 14px; background: var(--bg-0); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text-1); font-size: 15px; outline: none;
+    }
+    .input-group input:focus { border-color: var(--accent); }
+    .input-group button {
+      padding: 12px 20px; background: var(--accent); border: none; border-radius: 10px;
+      color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s;
+    }
+    .input-group button:hover { background: var(--accent-2); }
+    .msg { font-size: 13px; margin-top: 12px; font-weight: 600; color: #f87171; min-height: 20px; }
+
+    #result-area { margin-top: 24px; display: none; }
+    .script-box {
+      background: var(--bg-1); border: 1px solid var(--accent); border-radius: var(--radius);
+      padding: 16px; animation: fadeUp 0.4s ease-out both;
+    }
+    .script-text {
+      font-family: monospace; font-size: 13px; color: #a7f3d0; word-break: break-all; white-space: pre-wrap;
+      background: var(--bg-0); padding: 12px; border-radius: 8px; max-height: 250px; overflow-y: auto;
+    }
+    .copy-btn {
+      margin-top: 12px; background: rgba(14, 165, 233, 0.15); color: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.3); padding: 12px; border-radius: 8px;
+      cursor: pointer; font-weight: 700; width: 100%; font-size: 15px; transition: 0.2s;
+    }
+    .copy-btn:hover { background: rgba(14, 165, 233, 0.25); color: #fff; }
+
+    footer { text-align: center; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-3); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    
+    @media (max-width: 480px) {
+      .wrap { padding: 40px 16px 30px; }
+      .input-group { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.674 1.268 1.269 22.719l17.057.011 4.405-21.463L5.674 1.268zM16.32 15.771l-6.339 1.302-1.302-6.34 6.34-1.301 1.301 6.339z"/></svg>
+      </div>
+      <h1>Vượt 1 trong 4 link này để lấy script nhé</h1>
+    </header>
+
+    <div class="links" id="links"></div>
+
+    <div class="password-section">
+      <h2>Nhập mật khẩu để lấy script ngay lập tức</h2>
+      <p>Nếu bạn không có, hãy liên hệ với <a href="https://www.tiktok.com/@zankyo2114" target="_blank">tôi</a> để mua mật khẩu nhé.</p>
+      
+      <div class="input-group">
+        <input type="password" id="pwInput" placeholder="Nhập mật khẩu...">
+        <button id="submitBtn">Lấy Script</button>
+      </div>
+      <div class="msg" id="modalMsg"></div>
+    </div>
+
+    <div id="result-area"></div>
+
+    <footer>
+      <span>© Bản quyền của @zankyo2114 và @kenjobraly</span>
+    </footer>
+  </div>
+
+  <script>
+  (() => {
+    const RAW_LINKS = {
+      link4m: "https://link4m.org/60mTbFq",
+      bumxReview: "https://linkfree.click/s/chilliz1u1iqrmvxtffyi",
+      bbmkts: "https://bbmkts.com/go/ViKYH",
+      linkforearn: "http://linkforearn.com/muDLr0"
+    };
+
+    const WORKER_URL = "https://modgame.phucpro4211.workers.dev/api/verify";
+
+    let filename = window.location.pathname.split('/').pop();
+    let VIDEO_ID = filename.replace('.html', '');
+    if (!VIDEO_ID || VIDEO_ID === 'index') VIDEO_ID = 'default';
+
+    const container = document.getElementById('links');
+    const pwInput = document.getElementById('pwInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const modalMsg = document.getElementById('modalMsg');
+    const resultArea = document.getElementById('result-area');
+
+    const buttons = [];
+    if (RAW_LINKS.link4m.trim()) {
+      buttons.push(`<a class="btn btn-special" href="${RAW_LINKS.link4m.trim()}" target="_blank"><span class="btn-num">1</span><span class="btn-icon">⚡</span><span class="btn-content"><span class="btn-title">Link4M</span><span class="btn-desc">Dễ lấy mã</span></span></a>`);
+    }
+    if (RAW_LINKS.bumxReview.trim()) {
+      buttons.push(`<a class="btn" href="${RAW_LINKS.bumxReview.trim()}" target="_blank"><span class="btn-num">2</span><span class="btn-icon">🎬</span><span class="btn-content"><span class="btn-title">Bumx Review</span><span class="btn-desc">Nhanh nhất</span></span></a>`);
+    }
+    if (RAW_LINKS.bbmkts.trim()) {
+      buttons.push(`<a class="btn" href="${RAW_LINKS.bbmkts.trim()}" target="_blank"><span class="btn-num">3</span><span class="btn-icon">💰</span><span class="btn-content"><span class="btn-title">Bbmkts</span><span class="btn-desc">Dự phòng</span></span></a>`);
+    }
+    if (RAW_LINKS.linkforearn.trim()) {
+      buttons.push(`<a class="btn" href="${RAW_LINKS.linkforearn.trim()}" target="_blank"><span class="btn-num">4</span><span class="btn-icon">💵</span><span class="btn-content"><span class="btn-title">LinkForEarn</span><span class="btn-desc">Dự phòng</span></span></a>`);
+    }
+    container.innerHTML = buttons.join('');
+
+    submitBtn.addEventListener('click', async () => {
+      const pw = pwInput.value.trim();
+      if (!pw) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Đang kiểm tra...';
+      modalMsg.textContent = '';
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw, id: VIDEO_ID })
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          modalMsg.textContent = '';
+          submitBtn.textContent = 'Thành công!';
+          submitBtn.style.background = '#10b981';
+          pwInput.disabled = true;
+          renderResult(result.type, result.content);
+        } else {
+          modalMsg.textContent = result.message || 'Sai mật khẩu!';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Lấy Script';
+        }
+      } catch (err) {
+        modalMsg.textContent = 'Lỗi kết nối, thử lại sau!';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Lấy Script';
+      }
+    });
+
+    pwInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitBtn.click();
+    });
+
+    function renderResult(type, content) {
+      resultArea.style.display = 'block';
+
+      if (type === 'link') {
+        resultArea.innerHTML = `
+          <a href="${content}" target="_blank" class="btn btn-special" style="justify-content:center;">
+            <span class="btn-title">🚀 Bấm vào đây để đến link gốc</span>
+          </a>
+        `;
+      } else if (type === 'script') {
+        resultArea.innerHTML = `
+          <div class="script-box">
+            <div class="script-text" id="script-text">${content}</div>
+            <button class="copy-btn" id="copyBtn">📋 Copy Script</button>
+          </div>
+        `;
+
+        document.getElementById('copyBtn').addEventListener('click', () => {
+          const text = document.getElementById('script-text').innerText;
+          navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = '✅ Đã Copy!';
+            btn.style.color = '#10b981';
+            setTimeout(() => { btn.textContent = '📋 Copy Script'; btn.style.color = ''; }, 2000);
+          });
+        });
+      }
+    }
+  })();
+  </script>
+</body>
+</html>
